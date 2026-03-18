@@ -5,3 +5,9 @@ expressをインストールして簡易サーバー
 
 リモートリポジトリ
 https://github.com/aeon20250624-tech/webBlog.git
+
+
+NuxtJS
+Nuxt Content
+これらでブログを作成
+https://blog.ashcolor.jp/blog/programming/nuxt-blog

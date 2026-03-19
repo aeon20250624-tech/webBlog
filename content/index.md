@@ -1,3 +1,18 @@
-# My First Page
+---
+title: ガソリンタンク交換 ZX-6 ZX636
+description: ページの説明
+navigation: true
+draft: false
+date: 2025-12-13
+tag:
+  - ZX-6R
+---
 
-Here is some content.
+# ガソリンタンク交換 ZX-6 ZX636
+
+わりあい綺麗なガソリンタンク（ZX-6）がヤフオクにでていたので、落札した。  
+&nbsp;  
+早速、取りつけようとしたら、タンクキャップが合わない。  
+過去の落札情報とか確認してみるとどうも年式違いだったようだ。  
+商品説明にはZX636E型とあったのだが、ZX636G用だったようだ。  
+

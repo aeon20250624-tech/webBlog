@@ -5,6 +5,8 @@
 
 リモートリポジトリ
 https://github.com/aeon20250624-tech/webBlog.git
+Freeサーバー
+https://webblog-pk0c.onrender.com
 
 NuxtJS
 Nuxt Content

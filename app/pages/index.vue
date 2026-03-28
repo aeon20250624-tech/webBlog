@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: home } = await useAsyncData(() => queryCollection('content').path('/').first())
+const { data: home } = await useAsyncData(() => queryCollection('top').path('/').first())
 
 useSeoMeta({
   title: home.value?.title,
@@ -9,5 +9,11 @@ useSeoMeta({
 
 <template>
   <ContentRenderer v-if="home" :value="home" />
-  <div v-else>Home not found</div>
+  <div v-else>Site Error</div>
 </template>
+
+<style>
+.top-image {
+  width: 80%;
+}
+</style>

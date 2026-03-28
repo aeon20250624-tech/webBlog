@@ -18,6 +18,7 @@ logs
 .fleet
 .idea
 GoolgeBlogger
+sample
 
 # Local env files
 .env

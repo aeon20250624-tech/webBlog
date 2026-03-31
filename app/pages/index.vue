@@ -8,7 +8,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <ContentRenderer v-if="home" :value="home" />
+  <ContentRenderer v-if="home" :value="home" unwrap="p" class="has-text-centered" />
   <div v-else>Site Error</div>
 </template>
 

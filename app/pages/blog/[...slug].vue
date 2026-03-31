@@ -13,8 +13,9 @@ const { data } = await useAsyncData(route.path, () =>
 <template>
   <main class="article">
     <article v-if="data">
+      <h2 class="title">{{ data.title }}</h2>
       <p class="date">{{ dayjs(data.date).tz('Asia/Tokyo').format('YYYY年MM月DD日') }}</p>
-      <ContentRenderer :value="data" />
+      <ContentRenderer :value="data" unwrap="p"/>
     </article>
     <div v-else>
       <h1>記事が見つかりませんでした</h1>
@@ -24,6 +25,13 @@ const { data } = await useAsyncData(route.path, () =>
 </template>
 
 <style>
+.title{
+  background-image:url("/img/IMG_0092.jpeg");
+  background-size:100% 100%;
+  text-align: center;
+  height: 30vh;
+  line-height: 30vh;
+}
 .article-image {
   width: 60%;
 }

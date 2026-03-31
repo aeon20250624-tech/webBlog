@@ -12,3 +12,7 @@ NuxtJS
 Nuxt Content
 これらでブログを作成
 https://blog.ashcolor.jp/blog/programming/nuxt-blog
+
+bulmaインストールでnuxt-bulma-slimをつかおうとしたらエラーになった（node-sass必須のようだが、node-sassはdeprecatedなのでこいつはダメだ）
+@nuxtjs/bulmaもdeprecatedなので、
+bulma自体をyarnインストールして、node_module配下のbulma.cssを直接参照する(nuxt.config内で)

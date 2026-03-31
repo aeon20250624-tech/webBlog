@@ -3,8 +3,8 @@ import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 export default defineContentConfig({
   collections: {
     top: defineCollection({
-      type: 'page',
       source: '**/*.md',
+      type: 'page',
     }),
 
     blog: defineCollection({

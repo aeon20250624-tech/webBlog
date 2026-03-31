@@ -1,13 +1,7 @@
 <template>
-  <div class="content">
-    <slot />
-  </div>
+  <section class="section">
+    <div class="container">
+      <slot />
+    </div>
+  </section>
 </template>
-
-<style scoped>
-.content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-</style>

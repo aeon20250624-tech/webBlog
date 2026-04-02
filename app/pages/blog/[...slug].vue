@@ -2,6 +2,7 @@
 import dayjs from 'dayjs'
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 const route = useRoute();
@@ -24,7 +25,7 @@ const { data } = await useAsyncData(route.path, () =>
   </main>
 </template>
 
-<style>
+<style scoped>
 .title{
   background-image:url("/img/IMG_0092.jpeg");
   background-size:100% 100%;
@@ -32,6 +33,8 @@ const { data } = await useAsyncData(route.path, () =>
   height: 30vh;
   line-height: 30vh;
 }
+</style>
+<style>
 .article-image {
   width: 60%;
 }

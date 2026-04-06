@@ -1,18 +1,12 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
-const { data: articles } = await useAsyncData("articles", () => queryCollection("blog").order("id", "DESC").all());
+const { data: articles } = await useAsyncData("articles", () => queryCollection("blog").order("date", "DESC").all());
 </script>
 <template>
   <main>
     <ul v-if="articles" class="list">
       <li v-for="article in articles" :key="article.path" class="list_item">
         <NuxtLink :to="article.path">{{ article.title }}</NuxtLink>
-        <span class="date">{{ dayjs(article?.date).tz('Asia/Tokyo').format('YYYY年MM月DD日') }}</span>
+        <span class="date">{{ myDateFmt(article?.date) }}</span>
       </li>
     </ul>
   </main>

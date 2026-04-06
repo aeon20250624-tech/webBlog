@@ -1,45 +1,39 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 const route = useRoute();
 const { data } = await useAsyncData(route.path, () =>
-  queryCollection('blog').path(route.path).first(),
+    queryCollection('blog').path(route.path).first(),
 );
 </script>
 
 <template>
-  <main class="article">
-    <article v-if="data">
-      <h2 class="title">{{ data.title }}</h2>
-      <p class="date">{{ dayjs(data.date).tz('Asia/Tokyo').format('YYYY年MM月DD日') }}</p>
-      <ContentRenderer :value="data" unwrap="p"/>
-    </article>
-    <div v-else>
-      <h1>記事が見つかりませんでした</h1>
-      <p>{{ route.path }}</p>
-    </div>
-  </main>
+    <main class="article">
+        <article v-if="data">
+            <h2 class="title">{{ data.title }}</h2>
+            <p class="date">{{ myDateFmt(data.date) }}</p>
+            <ContentRenderer :value="data" unwrap="p"/>
+        </article>
+        <div v-else>
+            <h1>記事が見つかりませんでした</h1>
+            <p>{{ route.path }}</p>
+        </div>
+    </main>
 </template>
 
 <style scoped>
 .title{
-  background-image:url("/img/IMG_0092.jpeg");
-  background-size:100% 100%;
-  text-align: center;
-  height: 30vh;
-  line-height: 30vh;
+    background-image:url("/img/IMG_0092.jpeg");
+    background-size:100% 100%;
+    text-align: center;
+    height: 30vh;
+    line-height: 30vh;
 }
 </style>
 <style>
 .article-image {
-  width: 60%;
+    width: 60%;
 }
 .date {
-  text-align: right;
-  color: #555;
+    text-align: right;
+    color: #555;
 }
 </style>

@@ -5,7 +5,6 @@ import jaLocale from '@fullcalendar/core/locales/ja'
 import interactionPlugin, { type DateClickArg } from '@fullcalendar/interaction'
 import type { BlogCollectionItem } from '@nuxt/content'
 
-const { data: home } = await useAsyncData(() => queryCollection('top').path('/').first())
 const { data: blogs } = await useAsyncData(() => queryCollection('blog').order("date", "DESC").all())
 const blogDatesMap: Map<string, BlogCollectionItem[]> = new Map();
 if(blogs.value){
@@ -21,10 +20,10 @@ if(blogs.value){
 }
 // console.log('Blogs', blogDatesMap)
 
-useSeoMeta({
-    title: home.value?.title,
-    description: home.value?.description
-})
+// useSeoMeta({
+//     title: top.value?.title,
+//     description: top.value?.description
+// })
 
 // カレンダー
 const onCellMount = (arg: any) => {
@@ -128,25 +127,34 @@ const calendarOptions = {
 </script>
 
 <template>
-    <ContentRenderer v-if="home" :value="home" unwrap="p" class="has-text-centered" />
-
-    <div v-else>Site Error</div>
-    <div class="columns is-centered">
-        <div class="column is-two-thirds">
-        <ListArticle v-if="home" />
+    <div class="hero my-hero is-large" style="background-image: url('/img/IMG_0092.jpeg')">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <p class="title is-4">本サイトについて</p>
+                <p class="subtitle is-6">本サイトはつれづれとおぼえがきサイトです </p>
+            </div>
         </div>
     </div>
-
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-two-thirds">
+                <ListArticle />
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="columns is-centered">
         <div class="column is-two-thirds">
-            <FullCalendar :options="calendarOptions" ref="blogCal" v-if="home && blogs" />
+            <FullCalendar :options="calendarOptions" ref="blogCal" v-if="blogs" />
         </div>
     </div>
 </template>
 
 <style>
-.top-image {
-    width: 80%;
+.my-hero {
+    background-size: cover;
+    background-position: center;
 }
 .fc .fc-day-today {
     background-color: transparent !important;

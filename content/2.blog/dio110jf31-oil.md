@@ -1,6 +1,7 @@
 ---
 title: オイル交換 DIO110 JF31
 description: ページの説明
+image: /img/IMG_0900.jpeg
 navigation: true
 draft: false
 date: 2026-03-28

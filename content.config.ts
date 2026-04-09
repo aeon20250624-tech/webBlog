@@ -11,6 +11,7 @@ export default defineContentConfig({
       source: "2.blog/*.md",
       type: "page",
       schema: z.object({
+        image: z.string(),
         draft: z.boolean(),
         tag: z.array(z.string()),
         date: z.string(),

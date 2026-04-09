@@ -1,6 +1,7 @@
 ---
 title: ガソリンタンク交換 ZX-6 ZX636
 description: ページの説明
+image: /img/IMG_0769.jpg
 navigation: true
 draft: false
 date: 2025-12-13
@@ -17,7 +18,7 @@ tag:
 ![new Tank](/img/IMG_0769.jpg){.article-image}!  
 &nbsp;  
 交換前のタンク  
-![new Tank](/img/IMG_0768.jpg){.article-image}!  
+![old Tank](/img/IMG_0768.jpg){.article-image}!  
 &nbsp;  
 落札タンク側はネジ4本で固定するが  
 交換前タンクの方は３本だ。  
@@ -30,7 +31,7 @@ tag:
 ![new Tank](/img/IMG_0773.jpg){.article-image}!  
 &nbsp;  
 交換前のタンク  
-![new Tank](/img/IMG_0777.jpg){.article-image}!  
+![old Tank](/img/IMG_0777.jpg){.article-image}!  
 &nbsp;  
 売主に連絡して返品返却を頼んで快諾してくれたのだが、  
 商品自体が安かったしキャップだけ交換すればこのまま使えそうだったので  
@@ -51,7 +52,7 @@ tag:
 ![new Tank](/img/IMG_0778.jpg){.article-image}!  
 &nbsp;  
 こうなった  
-![new Tank](/img/IMG_0772.jpg){.article-image}!  
+![old Tank](/img/IMG_0772.jpg){.article-image}!  
 &nbsp;  
 キレイになったけど、以前のヘコミがなにか落ち葉が付いているようにも見えるといわれていたので  
 なくなったらなくなったで、なにか寂しい気もする。  

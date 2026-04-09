@@ -23,8 +23,7 @@ const getBlogContents= (src: string) => {
             <article class="media">
                 <div class="media-left">
                     <figure class="image is-64x64">
-                        <!-- いずれブログ記事の先頭画像を使う -->
-                        <img src="/img/IMG_0092.jpeg" alt="Image" />
+                        <img :src="blog.image" alt="Image" />
                     </figure>
                 </div>
                 <div class="media-content">

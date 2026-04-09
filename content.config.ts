@@ -14,6 +14,7 @@ export default defineContentConfig({
         draft: z.boolean(),
         tag: z.array(z.string()),
         date: z.string(),
+        rawbody: z.string(),
       }),
     }),
   }

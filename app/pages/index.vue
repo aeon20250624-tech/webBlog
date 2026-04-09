@@ -6,6 +6,7 @@ import interactionPlugin, { type DateClickArg } from '@fullcalendar/interaction'
 import type { BlogCollectionItem } from '@nuxt/content'
 
 const { data: blogs } = await useAsyncData(() => queryCollection('blog').order("date", "DESC").all())
+const tags: (string | string[]) = Array.from(new Set((blogs.value ?? []).map(item => item.tag).flat()));
 const blogDatesMap: Map<string, BlogCollectionItem[]> = new Map();
 if(blogs.value){
     // 年月日でblogをマッピングする
@@ -18,7 +19,6 @@ if(blogs.value){
 } else{
     console.log('Blogs Not Found')
 }
-// console.log('Blogs', blogDatesMap)
 
 // useSeoMeta({
 //     title: top.value?.title,
@@ -26,21 +26,7 @@ if(blogs.value){
 // })
 
 // カレンダー
-const onCellMount = (arg: any) => {
-    // 次月前月移動では全てのセルを作成するわけではないようだ、、、、以下のログにはdayCellDidMountコールバックされない日付がある。
-    // console.log('AAAAA', {other: arg.isOther, date: arg.date.toLocaleDateString('ja-JP'), className: arg.el.className});
-
-    // ブログのある日時のうち、blogdaysに日付だけを取得
-    // const blogdays: number[] = [];
-    // for(const blog of blogs.value ?? []){
-    //     blogdays.push((new Date(blog.date)).getDate());
-    // }
-    // blogdaysには日付だけが入ったので、ブログのある日付の色を変える、とりあえず年月は無視
-    // if(!arg.isOther && blogdays.includes(arg.date.getDate())){
-    //     arg.el.style.backgroundColor = "seashell";
-    // }
-}
-// カレンダー描画が完了すると呼ばれるようだ
+// 描画が完了すると呼ばれるようだ
 // 次月前月移動すると全てのセルを再作成するわけではないようなので、dayCellDidMountコールバックは使い物にならない。なので、こちら（datesSet）で処理する
 const blogCal = useTemplateRef<typeof FullCalendar>('blogCal');
 const onDatesSet = (arg: any) => {
@@ -63,10 +49,9 @@ const onDatesSet = (arg: any) => {
         }
     }
 }
-
 // 日付クリックでブログページへ遷移する
-// 特定日付のFullCalendarイベント取得は自力でコーディングするしかないようなので、FullCalendarイベントを使う意味がない
-// 結局、filterするなら、blogsを使えば良い
+// 特定日付のFullCalendarイベント取得は自力でコーディングするしかない（filter？）ようなので、FullCalendarイベントを使う意味がない
+// 結局、blogsを使えば良い
 const onDateClick = async (arg: DateClickArg) => {
     if(!blogCal.value || blogDatesMap.size === 0){
         console.log('FullCalendar or Blogs Not Found')
@@ -80,32 +65,6 @@ const onDateClick = async (arg: DateClickArg) => {
         await navigateTo(targets[0]!.path); // 同じ日付の記事が複数あったら、常に先頭へ遷移
     }
 };
-// ブログのある年月日をイベントとして登録
-// const makeEvents = () => {
-//     if(!blogs.value){
-//         console.log('blogs Not Found')
-//         return;
-//     }
-//     type AAAAA = {
-//         date: string;
-//         url: string;
-//         display: string;
-//     };
-//     const events: AAAAA[] = [];
-//     for(const blog of blogs.value){
-//         if(blog.date) {
-//             events.push(
-//                 {
-//                     date: blog.date,    // TODO dateだけでよいか？ endは設定なし？
-//                     url: blog.path,
-//                     display: 'none',
-//                 }
-//             );
-//         }
-//     }
-//     return events;
-// }
-
 const calendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
@@ -124,6 +83,12 @@ const calendarOptions = {
     dateClick: onDateClick,
     datesSet: onDatesSet,
 }
+
+const curTag = ref<string>('');
+const onTag = (ev: Event) => {
+    curTag.value = (<HTMLElement>ev.target)?.textContent;
+    // console.log('onTag', curTag.value);
+}
 </script>
 
 <template>
@@ -137,18 +102,23 @@ const calendarOptions = {
     </div>
     <section class="section">
         <div class="container">
-            <div class="columns is-centered">
+            <div class="columns">
+                <div class="column is-2">
+                    <div class="tags">
+                        <span v-for="tag of tags" class="tag is-hoverable" @click="onTag">{{ tag }}</span>
+                    </div>
+                </div>
                 <div class="column is-two-thirds">
-                <ListArticle />
+                    <ListArticle :tagBlog="curTag" />
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-one-third">
+                    <FullCalendar :options="calendarOptions" ref="blogCal" v-if="blogs" />
                 </div>
             </div>
         </div>
     </section>
-    <div class="columns is-centered">
-        <div class="column is-two-thirds">
-            <FullCalendar :options="calendarOptions" ref="blogCal" v-if="blogs" />
-        </div>
-    </div>
 </template>
 
 <style>

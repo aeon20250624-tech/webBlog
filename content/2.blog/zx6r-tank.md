@@ -1,7 +1,6 @@
 ---
 title: ガソリンタンク交換 ZX-6 ZX636
 description: ページの説明
-image: /img/IMG_0769.jpg
 navigation: true
 draft: false
 date: 2025-12-13

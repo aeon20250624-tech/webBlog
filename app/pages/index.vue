@@ -92,7 +92,7 @@ const onTag = (ev: Event) => {
 </script>
 
 <template>
-    <div class="hero my-hero is-large" style="background-image: url('/img/IMG_0092.jpeg')">
+    <div class="hero my-hero is-large" style="background-image: url('/img/IMG_0056.jpeg')">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <p class="title is-4">本サイトについて</p>
@@ -100,7 +100,7 @@ const onTag = (ev: Event) => {
             </div>
         </div>
     </div>
-    <section class="section">
+    <section class="section" v-if="blogs">
         <div class="container">
             <div class="columns">
                 <div class="column is-2">
@@ -114,7 +114,7 @@ const onTag = (ev: Event) => {
             </div>
             <div class="columns is-centered">
                 <div class="column is-one-third">
-                    <FullCalendar :options="calendarOptions" ref="blogCal" v-if="blogs" />
+                    <FullCalendar :options="calendarOptions" ref="blogCal" />
                 </div>
             </div>
         </div>

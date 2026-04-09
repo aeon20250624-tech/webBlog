@@ -10,9 +10,22 @@ watch(() => tag, async (tag) => {
 })
 
 // 記事本文だけを抽出
+// Frontmatterがあることが前提
 // 記事中の&nbsp;は削除
-const getBlogContents= (src: string) => {
-    return src.split('---')[2]?.slice(0, 50).replace('&nbsp;', '');
+const getBlogContents= (src: string, length: number): string => {
+    return src.split('---')[2]?.replace('&nbsp;', '').slice(0, length) ?? '';
+}
+
+// 記事最初のイメージを取得
+// Frontmatterがあることが前提
+const getBlogFirstImage= (src: string): string | undefined => {
+    // 記事本文
+    const article = src.split('---')[2];
+    // (/img/ZZZZ.jpg)
+    let imagePath: string | undefined = article?.split(/\n!\[.*\]/)?.[1]?.match(/^\(.*\)/)?.[0];
+    imagePath = imagePath?.slice(1, imagePath.length -1)
+
+    return imagePath;
 }
 </script>
 
@@ -23,7 +36,7 @@ const getBlogContents= (src: string) => {
             <article class="media">
                 <div class="media-left">
                     <figure class="image is-64x64">
-                        <img :src="blog.image" alt="Image" />
+                        <img :src="getBlogFirstImage(blog.rawbody) ?? '/img/IMG_0056.jpeg'" alt="Image" />
                     </figure>
                 </div>
                 <div class="media-content">
@@ -37,7 +50,7 @@ const getBlogContents= (src: string) => {
                                 </div>
                             </div>
                             <p>
-                                {{ getBlogContents(blog.rawbody) }}
+                                {{ getBlogContents(blog.rawbody, 70) + '...' }}
                             </p>
                     </div>
                 </div>

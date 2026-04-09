@@ -85,9 +85,12 @@ const calendarOptions = {
 }
 
 const curTag = ref<string>('');
-const onTag = (ev: Event) => {
-    curTag.value = (<HTMLElement>ev.target)?.textContent;
-    // console.log('onTag', curTag.value);
+const onTag = (ev: Event, all?: boolean) => {
+    if(all) {
+        curTag.value = '';
+    } else {
+        curTag.value = (<HTMLElement>ev.target)?.textContent;
+    }
 }
 </script>
 
@@ -105,6 +108,7 @@ const onTag = (ev: Event) => {
             <div class="columns">
                 <div class="column is-2">
                     <div class="tags">
+                        <span class="tag is-hoverable" @click="onTag($event, true)">すべて</span>
                         <span v-for="tag of tags" class="tag is-hoverable" @click="onTag">{{ tag }}</span>
                     </div>
                 </div>

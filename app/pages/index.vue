@@ -39,6 +39,8 @@ const onDatesSet = (arg: any) => {
     const endStr = myDateFmt(arg.end, 'YYYY-MM-DD');
     const calEl = (blogCal.value.$el as HTMLElement); // CompositionAPIで$elを使ってよいか不明
 
+    overrule(calEl);
+
     // ブログのある日付の色を変える
     for(const blogDate of [...blogDatesMap.keys()]){
         if(blogDate >= startStr && blogDate < endStr) {
@@ -65,6 +67,14 @@ const onDateClick = async (arg: DateClickArg) => {
         await navigateTo(targets[0]!.path); // 同じ日付の記事が複数あったら、常に先頭へ遷移
     }
 };
+// カレンダーの今日カラーを無効化する
+const overrule = (calEl: HTMLElement) => {
+    // fc-day-todayを取り除く
+    const dayCell = calEl.querySelector<HTMLElement>('.fc-daygrid-body .fc-day-today');
+    if(dayCell) {
+        dayCell.classList.remove('fc-day-today');
+    }
+}
 const calendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
@@ -84,6 +94,7 @@ const calendarOptions = {
     datesSet: onDatesSet,
 }
 
+// タグ管理、現在タグ
 const curTag = ref<string>('');
 const onTag = (ev: Event, all?: boolean) => {
     if(all) {
@@ -129,8 +140,5 @@ const onTag = (ev: Event, all?: boolean) => {
 .my-hero {
     background-size: cover;
     background-position: center;
-}
-.fc .fc-day-today {
-    background-color: transparent !important;
 }
 </style>

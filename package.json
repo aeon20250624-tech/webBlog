@@ -15,6 +15,7 @@
     "@fullcalendar/interaction": "^6.1.20",
     "@fullcalendar/vue3": "^6.1.20",
     "@nuxt/content": "^3.12.0",
+    "@vuepic/vue-datepicker": "^12.1.0",
     "better-sqlite3": "^12.8.0",
     "bulma": "^1.0.4",
     "dayjs": "^1.11.20",

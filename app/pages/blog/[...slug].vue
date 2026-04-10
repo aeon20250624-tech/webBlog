@@ -10,7 +10,9 @@ const { data } = await useAsyncData(route.path, () =>
         <article v-if="data">
             <h2 class="title">{{ data.title }}</h2>
             <p class="date">{{ myDateFmt(data.date) }}</p>
-            <ContentRenderer :value="data" unwrap="p"/>
+            <div class="content">
+                <ContentRenderer :value="data" unwrap="p"/>
+            </div>
         </article>
         <div v-else>
             <h1>記事が見つかりませんでした</h1>

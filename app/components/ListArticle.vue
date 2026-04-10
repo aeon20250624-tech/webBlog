@@ -41,7 +41,7 @@ const getBlogFirstImage= (src: string): string | undefined => {
                 </div>
                 <div class="media-content">
                     <div class="content">
-                            <div class="level">
+                            <div class="level level-is-shrinkable">
                                 <div class="level-left">
                                     <NuxtLink :to="blog.path"><strong>{{ blog.title }}</strong></NuxtLink>
                                 </div>
@@ -59,3 +59,11 @@ const getBlogFirstImage= (src: string): string | undefined => {
         </template>
     </div>
 </template>
+
+<style scoped>
+.level-is-shrinkable .level-left,
+.level-is-shrinkable .level-item,
+.level-is-shrinkable .level-right {
+  flex-shrink: 1;
+}
+</style>

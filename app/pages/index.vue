@@ -95,7 +95,7 @@ const calendarOptions = {
 }
 
 // タグ管理、現在タグ
-const curTag = ref<string>('');
+const curTag = ref<string>();
 const onTag = (ev: Event, all?: boolean) => {
     if(all) {
         curTag.value = '';
@@ -124,7 +124,7 @@ const onTag = (ev: Event, all?: boolean) => {
                     </div>
                 </div>
                 <div class="column is-two-thirds">
-                    <ListArticle :tagBlog="curTag" />
+                    <ListArticle :tagBlog="curTag" :firstNum="5"/>
                 </div>
             </div>
             <div class="columns is-centered">

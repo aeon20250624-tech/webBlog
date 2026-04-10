@@ -1,10 +1,14 @@
 <script setup lang="ts">
+const { tagBlog: tag, firstNum } = defineProps({
+    tagBlog: String,
+    firstNum: {type: Number, required: true}
+});
+
 // 初期画面
-let { data } = await useAsyncData("blogsAll", () => queryCollection("blog").limit(5).order("date", "DESC").all());
+let { data } = await useAsyncData("blogsAll", () => queryCollection("blog").order("date", "DESC").limit(firstNum).all());
 const blogs = toRef(data);
 
 // タグが指定された時の処理
-const { tagBlog: tag } = defineProps({tagBlog: String});
 watch(() => tag, async (tag) => {
     blogs.value = await queryCollection("blog").where('tag', 'LIKE', `%${tag}%`).order("date", "DESC").all();
 })

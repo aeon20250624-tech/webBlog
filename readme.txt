@@ -1,7 +1,4 @@
 パッケージ管理はyarn
-// 2026/03/18、もう削除して、Nuxt-Contentをインストール
-// expressをインストールして簡易サーバー
-//	yarn run start
 
 リモートリポジトリ
 https://github.com/aeon20250624-tech/webBlog.git
@@ -21,3 +18,4 @@ yarn add sassしてnuxt.config内でcss: ['bulma']すると、The Sass if() synt
 なのでcss: ['bulma/css/bulma.min.css']としてcss参照にしたところ、コンソールに以下のエラーがでてしまう
 http://localhost:3000/_nuxt/@fsC:/temp/GoogleBlogger/webBlog/node_modules/bulma/css/bulma.min.css net::ERR_ABORTED 404 (Not Found)
 なので、css: ['~/assets/css/mybulma.css']として、mybulma.css中でnode_module配下のbulma.min.cssをimportした。
+

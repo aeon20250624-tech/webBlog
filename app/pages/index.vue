@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import type { BlogCollectionItem } from '@nuxt/content'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jaLocale from '@fullcalendar/core/locales/ja'
 import interactionPlugin, { type DateClickArg } from '@fullcalendar/interaction'
-import type { BlogCollectionItem } from '@nuxt/content'
-import { VueDatePicker, type MonthModel } from '@vuepic/vue-datepicker';
+import { VueDatePicker } from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ja } from "date-fns/locale"
 
+// ブログ記事など
 const { data: blogs } = await useAsyncData(() => queryCollection('blog').order("date", "DESC").all())
 const tags: (string | string[]) = Array.from(new Set((blogs.value ?? []).map(item => item.tag).flat()));
 const blogDatesMap: Map<string, BlogCollectionItem[]> = new Map();
@@ -28,6 +29,7 @@ if(blogs.value){
 //     description: top.value?.description
 // })
 
+// カレンダーコンポーネントのテンプレート参照
 const blogCal = useTemplateRef<typeof FullCalendar>('blogCal');
 const dtPicker = useTemplateRef<typeof VueDatePicker>('datepicker');
 
@@ -36,7 +38,7 @@ type PickerVal = {
   month: number;
   year: number;
 };
-const pickerDt = ref<PickerVal>();
+const pickerVal = ref<PickerVal>();
 const opendtPicker = () => {
     if(dtPicker.value) {
         dtPicker.value.openMenu();
@@ -45,12 +47,12 @@ const opendtPicker = () => {
     }
 };
 const onDtPickerClose = () => {
-    if(!pickerDt.value) {
+    if(!pickerVal.value) {
         return;
     }
     if(blogCal.value) {
         // 選択「年月」をブログカレンダーにも設定する
-        blogCal.value.getApi().gotoDate( myDateFmt(`${pickerDt.value.year}-${pickerDt.value.month+1}-01`, 'YYYY-MM-DD') );
+        blogCal.value.getApi().gotoDate( myDateFmt(`${pickerVal.value.year}-${pickerVal.value.month+1}-01`, 'YYYY-MM-DD') );
     } else {
         console.log('FullCalendar Not Found.');
     }
@@ -82,7 +84,7 @@ const onDatesSet = (arg: any) => {
     }
 
     // 現表示の「年月」をDatPickerにも設定する
-    pickerDt.value = {year: arg.start.getFullYear(), month: arg.start.getMonth()};
+    pickerVal.value = {year: arg.start.getFullYear(), month: arg.start.getMonth()};
 }
 // 日付クリックでブログページへ遷移する
 // 特定日付のFullCalendarイベント取得は自力でコーディングするしかない（filter？）ようなので、FullCalendarイベントを使う意味がない
@@ -173,8 +175,8 @@ const onTag = (ev: Event, all?: boolean) => {
             <client-only>
                 <div class="columns is-centered">
                     <div class="column is-one-third" style="position: relative ">
-                        <!-- 入力Inputを消せないので、直下のinputを重ねている -->
-                        <VueDatePicker auto-apply month-picker :locale="ja" :formats="{ input: 'yyyy-MM-dd' }" v-model="pickerDt" @closed="onDtPickerClose" ref="datepicker" />
+                        <!-- 入力Inputを非表示にはできないので、直下のinputを重ねている -->
+                        <VueDatePicker auto-apply month-picker :locale="ja" :formats="{ input: 'yyyy-MM-dd' }" v-model="pickerVal" @closed="onDtPickerClose" ref="datepicker"/>
                         <input :disabled="true"  style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white;" />
                     </div>
                 </div>

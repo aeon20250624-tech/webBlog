@@ -6,36 +6,39 @@ const { data } = await useAsyncData(route.path, () =>
 </script>
 
 <template>
-    <main class="article">
-        <article v-if="data">
-            <h2 class="title">{{ data.title }}</h2>
-            <p class="date">{{ myDateFmt(data.date) }}</p>
+    <div class="hero my-hero is-large" style="background-image: url('/img/IMG_0092.jpeg')">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <template v-if="data">
+                    <p class="title is-4">{{ data.title }}</p>
+                </template>
+            </div>
+        </div>
+    </div>
+    <section class="section" v-if="data">
+        <div class="container">
+            <div class="level">
+                <div class="level-left">
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <small>{{ myDateFmt(data.date) }}</small>
+                    </div>
+                </div>
+            </div>
             <div class="content">
                 <ContentRenderer :value="data" unwrap="p"/>
             </div>
-        </article>
-        <div v-else>
-            <h1>記事が見つかりませんでした</h1>
-            <p>{{ route.path }}</p>
         </div>
-    </main>
+    </section>                            
+    <div v-else>
+        <h1>記事が見つかりませんでした</h1>
+        <p>{{ route.path }}</p>
+    </div>
 </template>
 
-<style scoped>
-.title{
-    background-image:url("/img/IMG_0092.jpeg");
-    background-size:100% 100%;
-    text-align: center;
-    height: 30vh;
-    line-height: 30vh;
-}
-</style>
 <style>
 .article-image {
     width: 60%;
-}
-.date {
-    text-align: right;
-    color: #555;
 }
 </style>

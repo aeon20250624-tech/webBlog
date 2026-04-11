@@ -47,10 +47,14 @@ const getBlogFirstImage= (src: string): string | undefined => {
                     <div class="content">
                             <div class="level level-is-shrinkable">
                                 <div class="level-left">
-                                    <NuxtLink :to="blog.path"><strong>{{ blog.title }}</strong></NuxtLink>
+                                    <div class="level-item">
+                                        <NuxtLink :to="blog.path"><strong>{{ blog.title }}</strong></NuxtLink>
+                                    </div>
                                 </div>
                                 <div class="level-right">
-                                    <small>{{ myDateFmt(blog?.date) }}</small>
+                                    <div class="level-item">
+                                        <small>{{ myDateFmt(blog?.date) }}</small>
+                                    </div>
                                 </div>
                             </div>
                             <p>

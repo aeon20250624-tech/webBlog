@@ -27,13 +27,13 @@ tag:
 今回のパーツでこの問題が露見した。  
 キャリパーシールだ。  
 これはDOT5、DOT4両方に対応していて、こんなのは純正にはないだろう。  
-![seal1](/img/IMG_3129.jpeg){.article-image}!  
-![seal2](/img/IMG_3128.jpeg){.article-image}!  
+![seal1](/img/IMG_3129.jpeg){.article-image}  
+![seal2](/img/IMG_3128.jpeg){.article-image}  
 &nbsp;  
 なので購入してみたけど、シール装着してピストンを入れようとしても  
 まったく入らない。  
 なので、やすりで削ってみた。  
-![shave-seal](/img/IMG_3127.jpeg){.article-image}!  
+![shave-seal](/img/IMG_3127.jpeg){.article-image}  
 こういう具合に新品シールをピストンに巻き付けてやすりで削った。  
 フルードをかけながら何度も入り具合を確認して、  
 １時間以上かけてなんとか指で圧入できる程度まで削った。  

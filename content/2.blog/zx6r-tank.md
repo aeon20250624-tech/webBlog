@@ -14,10 +14,10 @@ tag:
 商品説明にはZX636E型とあったのだが、ZX636G用だったようだ。  
 &nbsp;  
 落札したタンク  
-![new Tank](/img/IMG_0769.jpg){.article-image}!  
+![new Tank](/img/IMG_0769.jpg){.article-image}  
 &nbsp;  
 交換前のタンク  
-![old Tank](/img/IMG_0768.jpg){.article-image}!  
+![old Tank](/img/IMG_0768.jpg){.article-image}  
 &nbsp;  
 落札タンク側はネジ4本で固定するが  
 交換前タンクの方は３本だ。  
@@ -27,10 +27,10 @@ tag:
 コックのデザインも交換前の方がレーシーな感じがする。  
 &nbsp;  
 落札したタンク  
-![new Tank](/img/IMG_0773.jpg){.article-image}!  
+![new Tank](/img/IMG_0773.jpg){.article-image}  
 &nbsp;  
 交換前のタンク  
-![old Tank](/img/IMG_0777.jpg){.article-image}!  
+![old Tank](/img/IMG_0777.jpg){.article-image}  
 &nbsp;  
 売主に連絡して返品返却を頼んで快諾してくれたのだが、  
 商品自体が安かったしキャップだけ交換すればこのまま使えそうだったので  
@@ -48,10 +48,10 @@ tag:
 タンクの車体への固定、ポンプのタンクへの固定は問題なかった。  
 &nbsp;  
 結局、これが  
-![new Tank](/img/IMG_0778.jpg){.article-image}!  
+![new Tank](/img/IMG_0778.jpg){.article-image}  
 &nbsp;  
 こうなった  
-![old Tank](/img/IMG_0772.jpg){.article-image}!  
+![old Tank](/img/IMG_0772.jpg){.article-image}  
 &nbsp;  
 キレイになったけど、以前のヘコミがなにか落ち葉が付いているようにも見えるといわれていたので  
 なくなったらなくなったで、なにか寂しい気もする。  

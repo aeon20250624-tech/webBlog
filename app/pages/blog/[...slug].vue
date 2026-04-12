@@ -41,4 +41,8 @@ const { data } = await useAsyncData(route.path, () =>
 .article-image {
     width: 60%;
 }
+.article-red {
+    color: red;
+    font-size: xx-large;
+}
 </style>

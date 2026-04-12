@@ -40,17 +40,17 @@ Ninja H2
 ただし、スカブは羽が小さい、Dトラよりは大きいような気はするが、、、、  
 やふおくの出品数は一番多いんだけどね  
 &nbsp;  
-![DENSO FAN](/img/o4032302414988382208.jpg){.article-image}!  
+![DENSO FAN](/img/o4032302414988382208.jpg){.article-image}  
 このDENSOという文字と金属部分に注目して探そう。  
 ほかにもきっとある。  
-![DENSO URA FAN](/img/o4032302414988382237.jpg){.article-image}!  
+![DENSO URA FAN](/img/o4032302414988382237.jpg){.article-image}  
 あっ、電源コネクタはぶった切って工夫してください。  
 長さとかコネクタは合わないと思います。  
 DAEGとH2はそのままイケルかもしれんが、、、、  
 &nbsp;  
 2024/11/22  
 最近気づいたのだけど、羽だけならこいつが使えそう。  
-![DENSO URA FAN](/img/o0541052315512993359.jpg){.article-image}!  
+![DENSO URA FAN](/img/o0541052315512993359.jpg){.article-image}  
 GZYFとかいうメーカーみたい。  
 元々はホンダのCB1000系で使われているモノに近いようなのだけど、、、  
 &nbsp;  

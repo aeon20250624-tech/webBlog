@@ -13,7 +13,7 @@ tag:
 ---
 今、所有している80年式FXEFだけど、  
 コンペンセータースプロケットにはエボ用が使われている。  
-![COMPENSATING SPROCKET KIT](/img/IMG_0378.jpeg){.article-image}!  
+![COMPENSATING SPROCKET KIT](/img/IMG_0378.jpeg){.article-image}  
 &nbsp;  
 ショベルのパーツリストと見比べてると、形状が全く違うなぁと思っていたのだが、  
 ショベル用とエボ用とで比較検討しているサイトがあったので、あぁやっぱりと気づいた。  
@@ -23,6 +23,6 @@ tag:
 そのままエンジン始動するとなにかしらぶつかっているような金属音がしてしまう。  
 なので、スペーサーを戻して音がしないようにした。  
 &nbsp;  
-![PRIMARY COVER](/img/IMG_0893.jpeg){.article-image}!  
+![PRIMARY COVER](/img/IMG_0893.jpeg){.article-image}  
 ただ、スペーサーが厚すぎると、この写真のようにカバーを削ってしまう。  
 なかなかにムズイのだ。  

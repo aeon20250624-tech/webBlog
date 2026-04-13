@@ -39,8 +39,8 @@ const getBlogFirstImage= (src: string): string | undefined => {
             <div class="box">
             <article class="media">
                 <div class="media-left">
-                    <figure class="image is-64x64">
-                        <img :src="getBlogFirstImage(blog.rawbody) ?? '/img/IMG_0056.jpeg'" alt="Image" />
+                    <figure class="image is-128x128">
+                        <img :src="getBlogFirstImage(blog.rawbody) ?? '/img/IMG_0056.jpeg'" alt="Image"/>
                     </figure>
                 </div>
                 <div class="media-content">
@@ -73,5 +73,12 @@ const getBlogFirstImage= (src: string): string | undefined => {
 .level-is-shrinkable .level-item,
 .level-is-shrinkable .level-right {
   flex-shrink: 1;
+}
+
+.image img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 </style>

@@ -44,5 +44,6 @@ const { data } = await useAsyncData(route.path, () =>
 .article-red {
     color: red;
     font-size: xx-large;
+    white-space: pre;
 }
 </style>

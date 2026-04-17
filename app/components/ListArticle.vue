@@ -1,17 +1,25 @@
 <script setup lang="ts">
+import type { BlogCollectionItem } from '@nuxt/content';
+
 const { tagBlog: tag, firstNum } = defineProps({
     tagBlog: String,
     firstNum: {type: Number, required: true}
 });
+const blogs = ref<BlogCollectionItem[]>();
 
-// 初期画面
-let { data } = await useAsyncData("blogsAll", () => queryCollection("blog").order("date", "DESC").limit(firstNum).all());
-const blogs = toRef(data);
-
-// タグが指定された時の処理
+const getBlogs = async () => {
+    if(typeof tag !== 'string') {
+        // 初期画面
+        blogs.value = await queryCollection("blog").order("date", "DESC").limit(firstNum).all();
+    } else {
+        // タグが指定された時の処理
+        blogs.value = await queryCollection("blog").where('tag', 'LIKE', `%${tag}%`).order("date", "DESC").all();
+    }
+}
 watch(() => tag, async (tag) => {
-    blogs.value = await queryCollection("blog").where('tag', 'LIKE', `%${tag}%`).order("date", "DESC").all();
-})
+    getBlogs();
+}, { immediate: true })
+
 
 // 記事本文だけを抽出
 // Frontmatterがあることが前提
@@ -31,6 +39,7 @@ const getBlogFirstImage= (src: string): string | undefined => {
 
     return imagePath;
 }
+
 </script>
 
 <template>

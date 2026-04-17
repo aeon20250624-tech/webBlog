@@ -140,39 +140,40 @@ const calendarOptions = {
 }
 
 // タグ管理、現在タグ
-const curTag = ref<string>();
+const store = useTagStore();
+const { currentTag: curTag } = storeToRefs(store);
 const onTag = (ev: Event, all?: boolean) => {
     if(all) {
-        curTag.value = '';
+        store.update('');
     } else {
-        curTag.value = (<HTMLElement>ev.target)?.textContent;
+        store.update((<HTMLElement>ev.target)?.textContent);
     }
 }
 </script>
 
 <template>
-    <div class="hero my-hero is-large" style="background-image: url('/img/IMG_0056.jpeg')">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <p class="title is-4">本サイトについて</p>
-                <p class="subtitle is-6">本サイトはつれづれとおぼえがきサイトです </p>
+    <client-only>
+        <div class="hero my-hero is-large" style="background-image: url('/img/IMG_0056.jpeg')">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <p class="title is-4">本サイトについて</p>
+                    <p class="subtitle is-6">本サイトはつれづれとおぼえがきサイトです </p>
+                </div>
             </div>
         </div>
-    </div>
-    <section class="section" v-if="blogs">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-2">
-                    <div class="tags">
-                        <span class="tag is-hoverable" @click="onTag($event, true)">すべて</span>
-                        <span v-for="tag of tags" class="tag is-hoverable" @click="onTag">{{ tag }}</span>
+        <section class="section" v-if="blogs">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-2">
+                        <div class="tags">
+                            <span class="tag is-hoverable" @click="onTag($event, true)">すべて</span>
+                            <span v-for="tag of tags" class="tag is-hoverable" @click="onTag">{{ tag }}</span>
+                        </div>
+                    </div>
+                    <div class="column is-two-thirds">
+                        <ListArticle :tagBlog="curTag.value" :firstNum="5"/>
                     </div>
                 </div>
-                <div class="column is-two-thirds">
-                    <ListArticle :tagBlog="curTag" :firstNum="5"/>
-                </div>
-            </div>
-            <client-only>
                 <div class="columns is-centered">
                     <div class="column is-one-third" style="position: relative ">
                         <!-- 入力Inputを非表示にはできないので、直下のinputを重ねている -->
@@ -180,14 +181,14 @@ const onTag = (ev: Event, all?: boolean) => {
                         <input :disabled="true"  style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white;" />
                     </div>
                 </div>
-            </client-only>
-            <div class="columns is-centered">
-                <div class="column is-one-third">
-                    <FullCalendar :options="calendarOptions" ref="blogCal" />
+                <div class="columns is-centered">
+                    <div class="column is-one-third">
+                        <FullCalendar :options="calendarOptions" ref="blogCal" />
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </client-only>
 </template>
 
 <style>

@@ -134,9 +134,10 @@ const calendarOptions = {
     dayCellContent: function(arg: any) {
         return arg.date.getDate(); // 数字（1, 2, ...）のみ
     },
-    contentHeight: 'auto',
     dateClick: onDateClick,
     datesSet: onDatesSet,
+    // TODO remまたはemで設定するようにする
+    contentHeight: 450,
 }
 
 // タグ管理、現在タグ
@@ -164,26 +165,28 @@ const onTag = (ev: Event, all?: boolean) => {
         <section class="section" v-if="blogs">
             <div class="container">
                 <div class="columns">
-                    <div class="column is-2">
+                    <div class="column is-3">
                         <div class="tags">
                             <span class="tag is-hoverable" @click="onTag($event, true)">すべて</span>
                             <span v-for="tag of tags" class="tag is-hoverable" @click="onTag">{{ tag }}</span>
                         </div>
+                        <div class="columns is-centered">
+                            <div class="column is-one-third" style="position: relative ">
+                                <!-- 入力Inputを非表示にはできないので、直下のinputを重ねている -->
+                                <VueDatePicker auto-apply month-picker :locale="ja" :formats="{ input: 'yyyy-MM-dd' }" v-model="pickerVal" @closed="onDtPickerClose" ref="datepicker"/>
+                                <input :disabled="true"  style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white;" />
+                            </div>
+                        </div>
+                        <div class="columns is-centered">
+                            <div class="column is-9" style="position: relative;">
+                                <div class="container-fc">
+                                    <FullCalendar :options="calendarOptions" ref="blogCal" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="column is-two-thirds">
                         <ListArticle :tagBlog="curTag.value" :firstNum="5"/>
-                    </div>
-                </div>
-                <div class="columns is-centered">
-                    <div class="column is-one-third" style="position: relative ">
-                        <!-- 入力Inputを非表示にはできないので、直下のinputを重ねている -->
-                        <VueDatePicker auto-apply month-picker :locale="ja" :formats="{ input: 'yyyy-MM-dd' }" v-model="pickerVal" @closed="onDtPickerClose" ref="datepicker"/>
-                        <input :disabled="true"  style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white;" />
-                    </div>
-                </div>
-                <div class="columns is-centered">
-                    <div class="column is-one-third">
-                        <FullCalendar :options="calendarOptions" ref="blogCal" />
                     </div>
                 </div>
             </div>
@@ -196,4 +199,17 @@ const onTag = (ev: Event, all?: boolean) => {
     background-size: cover;
     background-position: center;
 }
+.container-fc {
+    width: 12rem;
+}
+.fc-header-toolbar {
+    margin-bottom: 0rem !important;
+}
+.fc-header-toolbar .fc-toolbar-title {
+    font-size: 1rem;
+}
+.fc-header-toolbar .fc-button {
+    padding: 0;
+}
+
 </style>

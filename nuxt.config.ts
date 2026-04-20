@@ -13,4 +13,9 @@ export default defineNuxtConfig({
     experimental: {
         serverAppConfig: false,
     },
+    nitro: {
+        prerender: {
+            autoSubfolderIndex: false
+        }
+    },
 })

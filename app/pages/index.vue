@@ -172,7 +172,12 @@ const onTag = (ev: Event, all?: boolean) => {
                         </div>
                         <div class="columns is-centered">
                             <div class="column">
-                                <VueDatePicker auto-apply month-picker :locale="ja" :formats="{ input: 'yyyy-MM-dd' }" v-model="pickerVal" :input-attrs="{ hideInputIcon: true, clearable: false }" @closed="onDtPickerClose" ref="datepicker"/>
+                                <VueDatePicker
+                                    auto-apply month-picker :locale="ja" :formats="{ input: 'yyyy-MM-dd' }" v-model="pickerVal"
+                                    :ui="{ input: 'my-dp-input' }"
+                                    :input-attrs="{ hideInputIcon: true, clearable: false }"
+                                    @closed="onDtPickerClose" ref="datepicker"
+                                />
                             </div>
                         </div>
                         <div class="columns is-centered">
@@ -197,8 +202,8 @@ const onTag = (ev: Event, all?: boolean) => {
     background-size: cover;
     background-position: center;
 }
-.dp__main input {
-    display: none !important;
+.my-dp-input {
+    display: none;
 }
 .container-fc {
     width: 12rem;

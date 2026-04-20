@@ -171,10 +171,8 @@ const onTag = (ev: Event, all?: boolean) => {
                             <span v-for="tag of tags" class="tag is-hoverable" @click="onTag">{{ tag }}</span>
                         </div>
                         <div class="columns is-centered">
-                            <div class="column is-one-third" style="position: relative ">
-                                <!-- 入力Inputを非表示にはできないので、直下のinputを重ねている -->
-                                <VueDatePicker auto-apply month-picker :locale="ja" :formats="{ input: 'yyyy-MM-dd' }" v-model="pickerVal" @closed="onDtPickerClose" ref="datepicker"/>
-                                <input :disabled="true"  style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: white;" />
+                            <div class="column">
+                                <VueDatePicker auto-apply month-picker :locale="ja" :formats="{ input: 'yyyy-MM-dd' }" v-model="pickerVal" :input-attrs="{ hideInputIcon: true, clearable: false }" @closed="onDtPickerClose" ref="datepicker"/>
                             </div>
                         </div>
                         <div class="columns is-centered">
@@ -198,6 +196,9 @@ const onTag = (ev: Event, all?: boolean) => {
 .my-hero {
     background-size: cover;
     background-position: center;
+}
+.dp__main input {
+    display: none !important;
 }
 .container-fc {
     width: 12rem;

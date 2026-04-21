@@ -3,6 +3,11 @@ const route = useRoute();
 const { data } = await useAsyncData(route.path, () =>
     queryCollection('blog').path(route.path).first(),
 );
+
+useSeoMeta({
+    title: data.value?.title,
+    description: data.value?.description,
+})
 </script>
 
 <template>
@@ -10,7 +15,7 @@ const { data } = await useAsyncData(route.path, () =>
         <div class="hero-body">
             <div class="container has-text-centered">
                 <template v-if="data">
-                    <p class="title is-4">{{ data.title }}</p>
+                    <h1 class="title is-4">{{ data.title }}</h1>
                 </template>
             </div>
         </div>

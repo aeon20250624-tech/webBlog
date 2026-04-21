@@ -24,11 +24,6 @@ if(blogs.value){
     console.log('Blogs Not Found')
 }
 
-// useSeoMeta({
-//     title: top.value?.title,
-//     description: top.value?.description
-// })
-
 // カレンダーコンポーネントのテンプレート参照
 const blogCal = useTemplateRef<typeof FullCalendar>('blogCal');
 const dtPicker = useTemplateRef<typeof VueDatePicker>('datepicker');
@@ -150,6 +145,11 @@ const onTag = (ev: Event, all?: boolean) => {
         store.update((<HTMLElement>ev.target)?.textContent);
     }
 }
+
+useSeoMeta({
+    title: 'トップページ',
+    description: 'ブログ一覧',
+})
 </script>
 
 <template>
@@ -157,7 +157,7 @@ const onTag = (ev: Event, all?: boolean) => {
         <div class="hero my-hero is-large" style="background-image: url('/img/IMG_0056.jpeg')">
             <div class="hero-body">
                 <div class="container has-text-centered">
-                    <p class="title is-4">本サイトについて</p>
+                    <h1 class="title is-4">本サイトについて</h1>
                     <p class="subtitle is-6">本サイトはつれづれとおぼえがきサイトです </p>
                 </div>
             </div>

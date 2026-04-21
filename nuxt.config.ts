@@ -15,7 +15,10 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            meta: [{name: "msvalidate.01", content: "B1770426134CE11DD3EBBF61688F75E9"}]
+            meta: [
+                {name: "msvalidate.01", content: "B1770426134CE11DD3EBBF61688F75E9"},
+                {name: 'google-site-verification', content: 'AL-uVwyMKMbFigjk04pCJQBgSiuzRcB0M0Pd4_52H9k'}
+            ]
         },
     },
 })

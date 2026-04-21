@@ -13,9 +13,9 @@ export default defineNuxtConfig({
     experimental: {
         serverAppConfig: false,
     },
-    nitro: {
-        prerender: {
-            autoSubfolderIndex: false
-        }
+    app: {
+        head: {
+            meta: [{name: "msvalidate.01", content: "B1770426134CE11DD3EBBF61688F75E9"}]
+        },
     },
 })

@@ -197,25 +197,8 @@ useSeoMeta({
     </client-only>
 </template>
 
-<style>
-.my-hero {
-    background-size: cover;
-    background-position: center;
-}
-.my-dp-input {
-    display: none;
-}
+<style scoped>
 .container-fc {
     width: 12rem;
 }
-.fc-header-toolbar {
-    margin-bottom: 0rem !important;
-}
-.fc-header-toolbar .fc-toolbar-title {
-    font-size: 1rem;
-}
-.fc-header-toolbar .fc-button {
-    padding: 0;
-}
-
 </style>

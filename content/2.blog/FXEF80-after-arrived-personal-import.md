@@ -1,6 +1,6 @@
 ---
-title: 輸入したハーレー、その後、ぱーと２
-description: 輸入したハーレー、その後、その２
+title: 個人輸入し到着したハーレー
+description: 輸入したハーレー、到着後、もろもろ作業
 navigation: true
 draft: false
 date: 2023-05-01

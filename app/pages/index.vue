@@ -28,6 +28,9 @@ if(blogs.value){
 const blogCal = useTemplateRef<typeof FullCalendar>('blogCal');
 const dtPicker = useTemplateRef<typeof VueDatePicker>('datepicker');
 
+const currentCalDay = useDaysStore();
+const storeTag = useTagStore();
+
 // DatePicker
 type PickerVal = {
   month: number;
@@ -46,8 +49,10 @@ const onDtPickerClose = () => {
         return;
     }
     if(blogCal.value) {
-        // 選択「年月」をブログカレンダーにも設定する
-        blogCal.value.getApi().gotoDate( myDateFmt(`${pickerVal.value.year}-${pickerVal.value.month+1}-01`, 'YYYY-MM-DD') );
+        // 選択「年月」をブログカレンダーに設定する
+        const days = myDateFmt(`${pickerVal.value.year}-${pickerVal.value.month+1}-01`, 'YYYY-MM-DD');
+        blogCal.value.getApi().gotoDate( days );
+        currentCalDay.update( days );
     } else {
         console.log('FullCalendar Not Found.');
     }
@@ -115,6 +120,15 @@ const overrule = (calEl: HTMLElement) => {
         };
     }
 }
+// ストアの値でカレンダー表示を変更する
+// 本来ならonMountedで行うべき処理だが、FullCalendarのテンプレート参照がonMountedのタイミングではnullなので、しょうがない、、、
+watch(blogCal, () => {
+    if(!blogCal.value || !currentCalDay.currentDays.value) {
+        return;
+    }
+
+    blogCal.value.getApi().gotoDate( currentCalDay.currentDays.value );
+});
 const calendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
@@ -136,13 +150,12 @@ const calendarOptions = {
 }
 
 // タグ管理、現在タグ
-const store = useTagStore();
-const { currentTag: curTag } = storeToRefs(store);
+const { currentTag: curTag } = storeToRefs(storeTag);
 const onTag = (ev: Event, all?: boolean) => {
     if(all) {
-        store.update('');
+        storeTag.update('');
     } else {
-        store.update((<HTMLElement>ev.target)?.textContent);
+        storeTag.update((<HTMLElement>ev.target)?.textContent);
     }
 }
 

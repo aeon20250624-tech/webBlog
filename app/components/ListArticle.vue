@@ -16,7 +16,7 @@ const getBlogs = async () => {
         blogs.value = await queryCollection("blog").where('tag', 'LIKE', `%${tag}%`).order("date", "DESC").all();
     }
 }
-watch(() => tag, async (tag) => {
+watch(() => tag, (tag) => {
     getBlogs();
 }, { immediate: true })
 

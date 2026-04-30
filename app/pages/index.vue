@@ -99,6 +99,7 @@ const onDateClick = async (arg: DateClickArg) => {
     // ブログページへ遷移する
     const targets = blogDatesMap.get(clkDateStr);
     if(targets) {
+        // TODO いずれ複数記事に対応する
         await navigateTo(targets[0]!.path); // 同じ日付の記事が複数あったら、常に先頭へ遷移
     }
 };

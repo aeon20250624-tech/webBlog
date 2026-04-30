@@ -21,4 +21,20 @@ export default defineNuxtConfig({
             ]
         },
     },
+    vite: {
+        optimizeDeps: {
+            include: [
+                '@vue/devtools-core',
+                '@vue/devtools-kit',
+                '@fullcalendar/vue3',
+                '@fullcalendar/daygrid',
+                '@fullcalendar/core/locales/ja',
+                '@fullcalendar/interaction',
+                'date-fns/locale',
+                'dayjs', // CJS
+                'dayjs/plugin/utc', // CJS
+                'dayjs/plugin/timezone', // CJS
+            ]
+        }
+    },
 })

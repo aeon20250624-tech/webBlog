@@ -1,3 +1,15 @@
+# TODO
+「CB400FOUR NC36のセルモーターブラシ交換」からトップページに戻った時に以下の警告メッセージが出る
+```
+No match found for location with path "cb400four-startermotor2"
+```
+ソース上では、以下を実行時に出る
+```app/pages/index.vue
+useAsyncData(() => queryCollection
+```
+
+以下はオリジナル
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

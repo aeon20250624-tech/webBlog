@@ -9,7 +9,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { ja } from "date-fns/locale"
 
 // ブログ記事など
-const { data: blogs } = await useAsyncData(() => queryCollection('blog').order("date", "DESC").all())
+const { data: blogs } = await useAsyncData(() => queryCollection('blog').order("date", "DESC").all());
 const tags: (string | string[]) = Array.from(new Set((blogs.value ?? []).map(item => item.tag).flat()));
 const blogDatesMap: Map<string, BlogCollectionItem[]> = new Map();
 if(blogs.value){
@@ -52,7 +52,6 @@ const onDtPickerClose = () => {
         // 選択「年月」をブログカレンダーに設定する
         const days = myDateFmt(`${pickerVal.value.year}-${pickerVal.value.month+1}-01`, 'YYYY-MM-DD');
         blogCal.value.getApi().gotoDate( days );
-        currentCalDay.update( days );
     } else {
         console.log('FullCalendar Not Found.');
     }
@@ -83,8 +82,9 @@ const onDatesSet = (arg: any) => {
         }
     }
 
-    // 現表示の「年月」をDatPickerにも設定する
+    // 現表示の「年月」をDatPicker、ストアに設定する
     pickerVal.value = {year: arg.start.getFullYear(), month: arg.start.getMonth()};
+    currentCalDay.update( startStr );
 }
 // 日付クリックでブログページへ遷移する
 // 特定日付のFullCalendarイベント取得は自力でコーディングするしかない（filter？）ようなので、FullCalendarイベントを使う意味がない
@@ -120,20 +120,12 @@ const overrule = (calEl: HTMLElement) => {
         };
     }
 }
-// ストアの値でカレンダー表示を変更する
-// 本来ならonMountedで行うべき処理だが、FullCalendarのテンプレート参照がonMountedのタイミングではnullなので、しょうがない、、、
-watch(blogCal, () => {
-    if(!blogCal.value || !currentCalDay.currentDays.value) {
-        return;
-    }
-
-    blogCal.value.getApi().gotoDate( currentCalDay.currentDays.value );
-});
 const calendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
     locale: jaLocale,
     timeZone: 'Asia/Tokyo',
+    initialDate: currentCalDay.currentDays.value,
     headerToolbar: {
         start: 'prev',
         center: 'title',

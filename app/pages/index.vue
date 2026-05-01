@@ -126,7 +126,7 @@ const calendarOptions = {
     initialView: 'dayGridMonth',
     locale: jaLocale,
     timeZone: 'Asia/Tokyo',
-    initialDate: currentCalDay.currentDays.value,
+    initialDate: currentCalDay.days,
     headerToolbar: {
         start: 'prev',
         center: 'title',
@@ -143,7 +143,7 @@ const calendarOptions = {
 }
 
 // タグ管理、現在タグ
-const { currentTag: curTag } = storeToRefs(storeTag);
+const { tag: curTag } = storeToRefs(storeTag);
 const onTag = (ev: Event, all?: boolean) => {
     if(all) {
         storeTag.update('');
@@ -195,7 +195,7 @@ useSeoMeta({
                         </div>
                     </div>
                     <div class="column is-two-thirds">
-                        <ListArticle :tagBlog="curTag.value" :firstNum="5"/>
+                        <ListArticle :tagBlog="curTag" :firstNum="5"/>
                     </div>
                 </div>
             </div>

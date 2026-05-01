@@ -4,30 +4,24 @@ export const useTagStore = defineStore('tag', () => {
     const tag =  ref<string>();
 
     // Getters
-    const currentTag = computed(() => {
-        return tag;
-    });
 
     // Actions
     function update(newTag: string) {
         tag.value = newTag;
     }
 
-    return { currentTag, update };
+    return { tag, update };
 });
 export const useDaysStore = defineStore('days', () => {
     // State
     const days =  ref<string>();
 
     // Getters
-    const currentDays = computed(() => {
-        return days;
-    });
 
     // Actions
     const update = (newDays: string) => {
         days.value = newDays;
     }
 
-    return { currentDays, update };
+    return { days, update };
 });

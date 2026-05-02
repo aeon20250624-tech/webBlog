@@ -46,32 +46,32 @@ const getBlogFirstImage= (src: string): string | undefined => {
     <div class="content">
         <template v-for="blog in blogs" :key="blog.path">
             <div class="box">
-            <article class="media">
-                <div class="media-left">
-                    <figure class="image is-128x128">
-                        <img :src="getBlogFirstImage(blog.rawbody) ?? '/img/IMG_0056.jpeg'" alt="Image"/>
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <div class="content">
-                            <div class="level level-is-shrinkable">
-                                <div class="level-left">
-                                    <div class="level-item">
-                                        <NuxtLink :to="blog.path"><strong>{{ blog.title }}</strong></NuxtLink>
-                                    </div>
-                                </div>
-                                <div class="level-right">
-                                    <div class="level-item">
-                                        <small>{{ myDateFmt(blog?.date) }}</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <p>
-                                {{ getBlogContents(blog.rawbody, 70) + '...' }}
-                            </p>
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img :src="getBlogFirstImage(blog.rawbody) ?? '/img/IMG_0056.jpeg'" alt="Image"/>
+                        </figure>
                     </div>
-                </div>
-            </article>
+                    <div class="media-content">
+                        <div class="content">
+                                <div class="level level-is-shrinkable">
+                                    <div class="level-left">
+                                        <div class="level-item">
+                                            <NuxtLink :to="blog.path"><strong>{{ blog.title }}</strong></NuxtLink>
+                                        </div>
+                                    </div>
+                                    <div class="level-right">
+                                        <div class="level-item">
+                                            <small>{{ myDateFmt(blog?.date) }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>
+                                    {{ getBlogContents(blog.rawbody, 70) + '...' }}
+                                </p>
+                        </div>
+                    </div>
+                </article>
             </div>
         </template>
     </div>

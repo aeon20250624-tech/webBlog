@@ -2,13 +2,13 @@
 import type { BlogCollectionItem, CollectionQueryGroup } from '@nuxt/content';
 
 const route = useRoute();
-const { data } = await useAsyncData(route.path, () =>
+const { data: article } = await useAsyncData(route.path, () =>
     queryCollection('blog').path(route.path).first(),
 );
 
 useSeoMeta({
-    title: data.value?.title,
-    description: data.value?.description,
+    title: article.value?.title,
+    description: article.value?.description,
 })
 
 // 同じタグのついた記事一覧を作成する。
@@ -16,20 +16,19 @@ useSeoMeta({
 // blogs = await queryCollection("blog").where('tag', 'LIKE', `%${tag}%`).order("date", "DESC").all();
 // タグなしで全部取得して、自力でfilterした方がコードがすっきりする気がする。どちらも全記事をオンメモリで処理するし。
 let blogs: BlogCollectionItem[] | undefined;
-if(data.value) {
+if(article.value) {
     const blogsRaw = queryCollection("blog");
-    if(data.value.tag.length > 0) {
+    if(article.value.tag.length > 0) {
         // １つ以上のタグが指定されているので、ORで連結する
         blogsRaw.orWhere(query => {
             let tmp: CollectionQueryGroup<BlogCollectionItem> | undefined;
-            for (const tag of data.value!.tag) {
+            for (const tag of article.value!.tag) {
                 tmp = (tmp ?? query).where('tag', 'LIKE', `%${tag}%`);
             }
             return tmp!;
         });
     }
     blogs =await blogsRaw.order("date", "ASC").all();
-    // console.log('########Articles', blogs);
 }
 </script>
 
@@ -37,43 +36,47 @@ if(data.value) {
     <div class="hero my-hero is-large" style="background-image: url('/img/IMG_0092.jpeg')">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <template v-if="data">
-                    <h1 class="title is-4">{{ data.title }}</h1>
+                <template v-if="article">
+                    <h1 class="title is-4">{{ article.title }}</h1>
                 </template>
             </div>
         </div>
     </div>
-    <section class="section" v-if="data">
+    <section class="section" v-if="article">
         <div class="container">
             <div class="level">
                 <div class="level-left">
-                    <div class="tags" v-if="data">
-                        <span v-for="tag of data.tag" class="tag">{{ tag }}</span>
+                    <div class="tags" v-if="article">
+                        <span v-for="tag of article.tag" class="tag">{{ tag }}</span>
                     </div>
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <small>{{ myDateFmt(data.date) }}</small>
+                        <small>{{ myDateFmt(article.date) }}</small>
                     </div>
                 </div>
             </div>
 
             <div class="columns">
-                <div class="column is-2">
-                    <div class="tags" v-if="blogs">
-                         <template v-for="blog of blogs">
-                            <template v-if="(blog.date === data.date) && (blog.title === data.title)">
-                                <span class="tag is-info">{{ blog.date }}</span>
-                            </template>
-                            <template v-else>
-                                <NuxtLink :to="blog.path"><span class="tag is-hoverable">{{ blog.date }}</span></NuxtLink>
-                            </template>
-                         </template>
-                    </div>
+                <!-- 同じタグの記事一覧 -->
+                <div class="column is-3">
+                    <template v-for="blog of blogs">
+                        <template v-if="(blog.date !== article.date) || (blog.title !== article.title)">
+                            <NuxtLink :to="blog.path">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <p class="title is-6 mb-1">{{ blog.date }}</p>
+                                        <p>{{ blog.title }}</p>
+                                    </div>
+                                </div>
+                            </NuxtLink>
+                        </template>
+                    </template>
                 </div>
+                <!-- 記事本文 -->
                 <div class="column is-two-thirds">
                     <div class="content">
-                        <ContentRenderer :value="data" unwrap="p"/>
+                        <ContentRenderer :value="article" unwrap="p"/>
                     </div>
                 </div>
             </div>

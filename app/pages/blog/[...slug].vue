@@ -61,7 +61,15 @@ if(article.value) {
                 <!-- 同じタグの記事一覧 -->
                 <div class="column is-3">
                     <template v-for="blog of blogs">
-                        <template v-if="(blog.date !== article.date) || (blog.title !== article.title)">
+                        <template v-if="(blog.date === article.date) && (blog.title === article.title)">
+                            <div class="card">
+                                <div class="card-content has-background-light">
+                                    <p class="title is-6 mb-1">{{ blog.date }}</p>
+                                    <p>{{ blog.title }}</p>
+                                </div>
+                            </div>
+                        </template>
+                        <template v-else>
                             <NuxtLink :to="blog.path">
                                 <div class="card">
                                     <div class="card-content">

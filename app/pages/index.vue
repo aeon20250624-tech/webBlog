@@ -8,9 +8,12 @@ import { VueDatePicker } from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ja } from "date-fns/locale"
 
+// ストア
+const currentCalDay = useDaysStore();
+const storeTag = useTagStore();
+
 // ブログ記事など
 const { data: blogs } = await useAsyncData(() => queryCollection('blog').order("date", "DESC").all());
-const tags: (string | string[]) = Array.from(new Set((blogs.value ?? []).map(item => item.tag).flat()));
 const blogDatesMap: Map<string, BlogCollectionItem[]> = new Map();
 if(blogs.value){
     // 年月日でblogをマッピングする
@@ -24,14 +27,8 @@ if(blogs.value){
     console.log('Blogs Not Found')
 }
 
-// カレンダーコンポーネントのテンプレート参照
-const blogCal = useTemplateRef<typeof FullCalendar>('blogCal');
-const dtPicker = useTemplateRef<typeof VueDatePicker>('datepicker');
-
-const currentCalDay = useDaysStore();
-const storeTag = useTagStore();
-
 // DatePicker
+const dtPicker = useTemplateRef<typeof VueDatePicker>('datepicker');
 type PickerVal = {
   month: number;
   year: number;
@@ -58,6 +55,8 @@ const onDtPickerClose = () => {
 };
 
 // カレンダー
+const blogCal = useTemplateRef<typeof FullCalendar>('blogCal');
+let curDay = ref<string | undefined>();
 // 描画が完了すると呼ばれるようだ
 // 次月前月移動すると全てのセルを再作成するわけではないようなので、dayCellDidMountコールバックは使い物にならない。なので、こちら（datesSet）で処理する
 const onDatesSet = (arg: any) => {
@@ -86,22 +85,14 @@ const onDatesSet = (arg: any) => {
     pickerVal.value = {year: arg.start.getFullYear(), month: arg.start.getMonth()};
     currentCalDay.update( startStr );
 }
-// 日付クリックでブログページへ遷移する
-// 特定日付のFullCalendarイベント取得は自力でコーディングするしかない（filter？）ようなので、FullCalendarイベントを使う意味がない
-// 結局、blogsを使えば良い
+// 日付クリックでカレンダーの下にタイトルを表示する。
+// そのタイトルをクリックすることで街頭記事へ遷移する
 const onDateClick = async (arg: DateClickArg) => {
     if(!blogCal.value || blogDatesMap.size === 0){
         console.log('FullCalendar or Blogs Not Found')
         return;
     }
-    const clkDateStr = myDateFmt(arg.date, 'YYYY-MM-DD')
-
-    // ブログページへ遷移する
-    const targets = blogDatesMap.get(clkDateStr);
-    if(targets) {
-        // TODO いずれ複数記事に対応する
-        await navigateTo(targets[0]!.path); // 同じ日付の記事が複数あったら、常に先頭へ遷移
-    }
+    curDay.value = myDateFmt(arg.date, 'YYYY-MM-DD');
 };
 // カレンダーの今日カラーを無効化する
 const overrule = (calEl: HTMLElement) => {
@@ -143,6 +134,7 @@ const calendarOptions = {
 }
 
 // タグ管理、現在タグ
+const tags: (string | string[]) = Array.from(new Set((blogs.value ?? []).map(item => item.tag).flat()));
 const { tag: curTag } = storeToRefs(storeTag);
 const onTag = (ev: Event, all?: boolean) => {
     if(all) {
@@ -187,11 +179,14 @@ useSeoMeta({
                             </div>
                         </div>
                         <div class="columns is-centered">
-                            <div class="column is-9" style="position: relative;">
+                            <div class="column">
                                 <div class="container-fc">
                                     <FullCalendar :options="calendarOptions" ref="blogCal" />
                                 </div>
                             </div>
+                        </div>
+                        <div class="box" v-for="blog of blogDatesMap.get(curDay ?? '')">
+                            <NuxtLink :to="blog.path"><p>{{ blog.title }}</p></NuxtLink>
                         </div>
                     </div>
                     <div class="column is-two-thirds">
@@ -205,6 +200,6 @@ useSeoMeta({
 
 <style scoped>
 .container-fc {
-    width: 12rem;
+    width: 16rem;
 }
 </style>

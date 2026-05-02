@@ -44,7 +44,7 @@ const getBlogFirstImage= (src: string): string | undefined => {
 
 <template>
     <div class="content">
-        <template v-for="blog in blogs" :key="blog.path">
+        <template v-for="blog of blogs" :key="blog.path">
             <div class="box">
                 <article class="media">
                     <div class="media-left">
